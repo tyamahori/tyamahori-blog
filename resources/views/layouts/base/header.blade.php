@@ -4,7 +4,9 @@
       <div class="section">
         <div class="has-text-centered">
           <h1 class="title is-1 is-spaced">
-            <img class="logo" src="{{ asset('img/logo.png') }}" alt="{{ Config::get('app.name') }}">
+            <a href="{{ Config::get('url') }}">
+              <img class="logo" src="{{ asset('img/logo.png') }}" alt="{{ Config::get('app.name') }}">
+            </a>
           </h1>
           <h4 class="subtitle is-4">A Web Developer</h4>
         </div>
