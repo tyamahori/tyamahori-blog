@@ -43,7 +43,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql/.volumes:/var/lib/mysql
+      - db-volume:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_USER: tyamahori
       MYSQL_ROOT_PASSWORD: tyamahori
@@ -83,3 +84,6 @@ services:
     container_name: tyamahori-mailhog
     ports:
       - 8025:8025
+
+volumes:
+  db-volume:
