@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function profile(ShowPostService $service)
     {
         return view('front.post', [
-            'post' => $service->__invoke(PostId::of(1)),
+            'post' => $service->showClient(PostId::of(1)),
         ]);
     }
 
