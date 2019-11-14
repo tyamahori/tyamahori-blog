@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.62mm" height="25.46mm" viewBox="0 0 66.97 72.17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #231815;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>アセット 8</title>
+  <g id="レイヤー_2" data-name="レイヤー 2">
+    <g id="レイヤー_1-2" data-name="レイヤー 1">
+      <g>
+        <path d="M27,60.15c-2.81-.8-4.63-3.33-4.63-7.7V28.05H36.75V16H22.47V0L9.66,1.49V16H0v12H9.66v24.4c0,10.41,4,16.94,10.67,19.45Z"/>
+        <polygon class="cls-1" points="52.1 15.37 42.53 32.77 37.1 43.72 32.1 32.52 30.56 29.22 23.41 42.21 29.97 54.43 20.19 71.67 34.44 71.67 66.47 15.37 52.1 15.37"/>
+      </g>
+    </g>
+  </g>
+</svg>
