@@ -24,10 +24,18 @@ class FrontPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function isTopPageDisplayed()
+    public function isTopPageDisplayed(): void
     {
         $response = $this->get('/');
+        $response->assertStatus(200);
+    }
 
+    /**
+     * @test
+     */
+    public function IsProfilePageDisplayed(): void
+    {
+        $response = $this->get('/profile');
         $response->assertStatus(200);
     }
 }
