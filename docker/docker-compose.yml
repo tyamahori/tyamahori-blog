@@ -32,7 +32,6 @@ services:
     container_name: tyamahori-php-fpm
     volumes:
       - ../:/opt/tyamahori.com
-      - ./deployer/ssh:/root/.ssh
     working_dir: /opt/tyamahori.com
     environment:
       TZ: Asia/Tokyo
