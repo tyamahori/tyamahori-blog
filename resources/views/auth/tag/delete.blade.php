@@ -9,8 +9,8 @@
       <div class="field">
         <label class="label">Selected Tag</label>
         <div class="control">
-          <p>{{ $tag->nameColumnData }}</p>
-          <input type="hidden" name="id" value="{{ $tag->primaryKeyColumnData }}">
+          <p>{{ $tag->name_data }}</p>
+          <input type="hidden" name="id" value="{{ $tag->primary_key_data }}">
         </div>
       </div>
       <button class="button has-background-danger has-text-white-bis">
