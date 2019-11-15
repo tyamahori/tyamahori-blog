@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Eloquent\PostOrm;
+use App\Eloquent\TagOrm;
+use App\Eloquent\CategoryOrm;
 
 class DatabaseSeeder extends Seeder
 {
@@ -10,15 +13,15 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         factory(User::class, 1)->create();
-        factory(App\Models\Post::class, 'publicMockPostData',30)->create();
-        factory(App\Models\Tag::class, 30)->create();
-        factory(App\Models\Category::class, 10)->create();
+        factory(PostOrm::class, 'publicMockPostData',30)->create();
+        factory(TagOrm::class, 30)->create();
+        factory(CategoryOrm::class, 10)->create();
 
-        $tags = App\Models\Tag::all();
-        App\Models\Post::all()->each(static function ($post) use ($tags) {
+        $tags = TagOrm::all();
+        PostOrm::all()->each(static function ($post) use ($tags) {
             $post->tags()->attach(
                 $tags->random(random_int(1, 30))->pluck('id')->toArray()
             );

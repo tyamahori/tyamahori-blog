@@ -1,10 +1,10 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Tag;
+use App\Eloquent\TagOrm;
 
-$factory->define(Tag::class, static function (Faker $faker) {
+$factory->define(TagOrm::class, static function (Faker $faker) {
     return [
-        Tag::getNameColumn() => $faker->text($maxNbChars = 10),
+        TagOrm::getNameColumn() => $faker->text($maxNbChars = 10),
     ];
 });

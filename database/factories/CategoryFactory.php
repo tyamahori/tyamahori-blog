@@ -1,8 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Eloquent\CategoryOrm;
 
-$factory->define(App\Models\Category::class, function (Faker $faker) {
+$factory->define(CategoryOrm::class, static function (Faker $faker) {
     return [
         'category' => $faker->text($maxNbChars = 10),
     ];
