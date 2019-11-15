@@ -26,7 +26,7 @@ class CategoryRequest extends FormRequest
         $nameColumn = Category::getNameColumn();
 
         return [
-//            'category' => 'required|unique:categories,' . $nameColumn,
+            'category' => 'required|unique:categories,' . $nameColumn,
         ];
     }
 }
