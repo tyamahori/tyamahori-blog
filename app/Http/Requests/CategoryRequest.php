@@ -23,12 +23,10 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $primaryKeyColumn = Category::getPrimaryKeyColumnName();
-        $nameColumn       = Category::getNameColumn();
+        $nameColumn = Category::getNameColumn();
 
         return [
-            $primaryKeyColumn => 'required|integer',
-            $nameColumn       => 'required|unique:categories,' . $nameColumn
+            'category' => 'required|unique:categories,' . $nameColumn,
         ];
     }
 }

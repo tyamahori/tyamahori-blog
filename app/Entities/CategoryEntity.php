@@ -7,6 +7,7 @@ use App\Exceptions\ValueObjectError;
 use App\Interfaces\Entity\CategoryInterface;
 use App\ValueObject\CategoryId;
 use App\ValueObject\CategoryName;
+use Exception;
 
 class CategoryEntity implements CategoryInterface
 {
@@ -38,5 +39,34 @@ class CategoryEntity implements CategoryInterface
     public function getName(): CategoryName
     {
         return CategoryName::of($this->categoryOrm->name_data);
+    }
+
+    /**
+     * カテゴリ名を設定するメソッド
+     * @param CategoryName $categoryName
+     * @return CategoryEntity
+     */
+    public function setName(CategoryName $categoryName): CategoryEntity
+    {
+        $this->categoryOrm->name_data = $categoryName->getValue();
+        return $this;
+    }
+
+    /**
+     * ORMを取得するメソッド
+     * @return CategoryOrm
+     */
+    public function getCategoryOrm(): CategoryOrm
+    {
+        return $this->categoryOrm;
+    }
+
+    /**
+     * ORMを削除するメソッド
+     * @throws Exception
+     */
+    public function delete(): void
+    {
+        $this->categoryOrm->delete();
     }
 }

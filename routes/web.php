@@ -52,11 +52,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(static functio
         Route::get('/', 'Admin\CategoryController@index')->name('index');
         Route::post('/', 'Admin\CategoryController@store');
 
-        Route::get('edit/{category}', 'Admin\CategoryController@edit')->name('edit');
-        Route::post('edit/{category}', 'Admin\CategoryController@update');
+        Route::get('edit/{id}', 'Admin\CategoryController@edit')->name('edit');
+        Route::post('edit/{id}', 'Admin\CategoryController@update');
 
-        Route::get('delete/{category}', 'Admin\CategoryController@delete')->name('destroy');
-        Route::post('delete/{category}', 'Admin\CategoryController@destroy');
+        Route::get('delete/{id}', 'Admin\CategoryController@delete')->name('destroy');
+        Route::post('delete/{id}', 'Admin\CategoryController@destroy');
     });
 
     Route::prefix('tag')->name('tag.')->group(static function () {
