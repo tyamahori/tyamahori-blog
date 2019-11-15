@@ -27,7 +27,7 @@
   </section>
   <section class="section">
     <div class="container">
-      <h1 class="title">All Categoryies</h1>
+      <h1 class="title">All Categories</h1>
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
         <tr>
@@ -46,11 +46,11 @@
         <tbody>
         @foreach($categories as $category)
           <tr>
-            <th>{{ $category->id }}</th>
-            <th>{{ $category->category }}</th>
+            <th>{{ $category->getId()->getValue() }}</th>
+            <th>{{ $category->getName()->getValue() }}</th>
             <th>
-              <a class="button" href="{{ route('admin.category.edit', ['category' => $category->id]) }}">Edit</a>
-              <a class="button has-background-danger has-text-white-bis" href="{{ route('admin.category.destroy', ['category' => $category->id]) }}">Delete</a>
+              <a class="button" href="{{ route('admin.category.edit', ['id' => $category->getId()->getValue()]) }}">Edit</a>
+              <a class="button has-background-danger has-text-white-bis" href="{{ route('admin.category.destroy', ['id' => $category->getId()->getValue()]) }}">Delete</a>
             </th>
           </tr>
         @endforeach

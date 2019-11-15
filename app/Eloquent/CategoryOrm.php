@@ -109,4 +109,13 @@ class CategoryOrm extends Model
     {
         return $this->attributes[self::getNameColumn()];
     }
+
+    /**
+     * カテゴリ名を設定するミューテタ
+     * @param $value
+     */
+    public function setNameDataAttribute($value): void
+    {
+        $this->attributes[self::getNameColumn()] = $value;
+    }
 }

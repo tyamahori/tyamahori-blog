@@ -9,8 +9,8 @@
       <div class="field">
         <label class="label">Selected Category</label>
         <div class="control">
-          <p>{{ $category->category }}</p>
-          <input type="hidden" name="id" value="{{ $category->id }}">
+          <p>{{ $category->getName()->getValue() }}</p>
+          <input type="hidden" name="id" value="{{ $category->getId()->getValue() }}">
         </div>
       </div>
       <button class="button has-background-danger has-text-white-bis">

@@ -16,8 +16,8 @@
         <div class="field">
           <label class="label">Current Category</label>
           <div class="control">
-            <input class="input" type="text" name="{{ $category::getNameColumn() }}" value="{{ $category->nameColumnData }}" placeholder="new category">
-            <input type="hidden" name="{{ $category::getPrimaryKeyColumnName() }}" value="{{ $category->primaryKeyData }}">
+            <input class="input" type="text" name="category" value="{{ $category->getName()->getValue() }}" placeholder="new category">
+            <input type="hidden" name="id" value="{{ $category->getId()->getValue() }}">
           </div>
         </div>
         <button class="button is-primary">

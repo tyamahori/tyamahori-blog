@@ -21,4 +21,18 @@ interface CategoryRepositoryInterface
      * @return TagInterface|null
      */
     public function find(CategoryId $id): ?CategoryInterface;
+
+    /**
+     * カテゴリの新規登録
+     * @param array $record
+     * @return CategoryInterface
+     */
+    public function new(array $record): CategoryInterface;
+
+    /**
+     * カテゴリの永続化
+     * @param CategoryInterface $categoryEntity
+     * @return CategoryInterface
+     */
+    public function persist(CategoryInterface $categoryEntity): CategoryInterface;
 }
