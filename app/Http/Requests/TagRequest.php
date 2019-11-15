@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Tag;
+use App\Eloquent\TagOrm;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TagRequest extends FormRequest
@@ -24,7 +24,7 @@ class TagRequest extends FormRequest
      */
     public function rules(): array
     {
-        $nameColumn = Tag::getNameColumn();
+        $nameColumn = TagOrm::getNameColumn();
 
         return [
             'tag' => 'required|unique:tags,' . $nameColumn

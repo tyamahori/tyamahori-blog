@@ -16,7 +16,7 @@
         <div class="field">
           <label class="label">Selected Tag</label>
           <div class="control">
-            <input class="input" type="text" name="tag" value="{{ $tag->nameColumnData }}" placeholder="new tag">
+            <input class="input" type="text" name="tag" value="{{ $tag->name_data }}" placeholder="new tag">
           </div>
         </div>
         <button class="button is-primary">

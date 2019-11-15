@@ -31,10 +31,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
         $this->app->bind(TagRepositoryInterface::class, TagRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
-
-        $this->app->bind(
-            'App\Repositories\Interfaces\TagRepositoryInterface',
-            'App\Repositories\Concretes\MysqlTagRepository'
-        );
     }
 }

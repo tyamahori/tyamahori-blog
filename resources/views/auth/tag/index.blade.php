@@ -1,5 +1,7 @@
 @extends('layouts.admin.master')
+
 @section('title', 'Tag List')
+
 @section('content')
   <section class="section">
     <div class="container">
@@ -46,11 +48,11 @@
         <tbody>
         @foreach($tags as $tag)
           <tr>
-            <th>{{ $tag->primaryKeyColumnData }}</th>
-            <th>{{ $tag->nameColumnData }}</th>
+            <th>{{ $tag->primary_key_data }}</th>
+            <th>{{ $tag->name_data }}</th>
             <th>
-              <a class="button" href="{{ route('admin.tag.edit', ['tag' => $tag->primaryKeyColumnData]) }}">Edit</a>
-              <a class="button has-background-danger has-text-white-bis" href="{{ route('admin.tag.destroy', ['tag' => $tag->primaryKeyColumnData]) }}">Delete</a>
+              <a class="button" href="{{ route('admin.tag.edit', ['tag' => $tag->primary_key_data]) }}">Edit</a>
+              <a class="button has-background-danger has-text-white-bis" href="{{ route('admin.tag.destroy', ['tag' => $tag->primary_key_data]) }}">Delete</a>
             </th>
           </tr>
         @endforeach

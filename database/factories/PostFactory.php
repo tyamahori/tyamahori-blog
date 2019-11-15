@@ -1,8 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Eloquent\PostOrm;
 
-$factory->define(App\Models\Post::class, function (Faker $faker) {
+$factory->define(PostOrm::class, static function (Faker $faker) {
     return [
         'title'       => $faker->text($maxNbChars = 20),
         'description' => $faker->text($maxNbChars = 50),
@@ -12,7 +13,7 @@ $factory->define(App\Models\Post::class, function (Faker $faker) {
     ];
 }, 'privateMockPostData');
 
-$factory->define(App\Models\Post::class, function (Faker $faker) {
+$factory->define(PostOrm::class, static function (Faker $faker) {
     return [
         'title'       => $faker->text($maxNbChars = 20),
         'description' => $faker->text($maxNbChars = 50),
