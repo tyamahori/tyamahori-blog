@@ -2,6 +2,7 @@
 
 namespace App\Services\Post;
 
+use App\Interfaces\Entity\PostInterface;
 use App\Interfaces\Repository\PostRepositoryInterface;
 use App\ValueObject\PostIsPublic;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -32,23 +33,28 @@ class Lists
     public function __invoke(PostIsPublic $isPublic, int $postsPerPage): LengthAwarePaginator
     {
         // 全権取得
-        $all = $this->postRepository->list();
+        $allPosts = $this->postRepository->list();
 
         // 引数の条件に応じて公開分のみにするかを確認
         if ($isPublic->getValue()) {
-            $all = $all->filter(static function ($postEntity) {
+            $allPosts = $allPosts->filter(static function (PostInterface $postEntity) {
                 return $postEntity->isPublic()->getValue();
             });
         }
 
+        // 公開日が新しい順に並べ替え
+        $allPosts = $allPosts->sortByDesc(static function (PostInterface $postEntity) {
+            return $postEntity->getCreatedAt()->getValue();
+        });
+
         // 全部の件数をカウント
-        $counts = $all->count();
+        $counts = $allPosts->count();
 
         // 現在のページ番号を取得
         $currentPageNo = Paginator::resolveCurrentPage();
 
         // ページネートに必要な情報を取得する
-        $chunks = $all->chunk($postsPerPage)[$currentPageNo - 1];
+        $chunks = $allPosts->chunk($postsPerPage)[$currentPageNo - 1];
 
         // ページネートして返す
         return new LengthAwarePaginator($chunks, $counts, $postsPerPage, $currentPageNo);
