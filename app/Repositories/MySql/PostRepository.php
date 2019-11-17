@@ -23,9 +23,7 @@ class PostRepository implements PostRepositoryInterface
      */
     public function list(): Collection
     {
-        return PostOrm::with(['category', 'tags'])
-            ->orderByDesc(PostOrm::getCreatedAtColumnName())
-            ->get()
+        return PostOrm::all()
             ->map(static function (PostOrm $postOrm) {
                 return new PostEntity($postOrm);
             });
