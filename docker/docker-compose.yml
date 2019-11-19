@@ -75,7 +75,7 @@ services:
     volumes:
       - ../:/app
     working_dir: '/app'
-    command:  /bin/bash -c 'yarn install && yarn run build && yarn run watch'
+    tty: true
     environment:
       TZ: Asia/Tokyo
 
