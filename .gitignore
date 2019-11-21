@@ -5,6 +5,7 @@
 /public/css
 /public/js
 /public/lib
+/public/stisla
 /storage/*.key
 /vendor
 /.idea
