@@ -7,7 +7,8 @@ case "$1" in
   docker exec -it tyamahori-php-fpm php artisan key:generate
   docker exec -it tyamahori-php-fpm composer install
   docker exec -it tyamahori-php-fpm chmod -R 777 storage
-  docker exec -it tyamahori-node yarn install && yarn run build
+  docker exec -it tyamahori-node yarn install
+  docker exec -it tyamahori-node yarn run build
   docker exec -it tyamahori-php-fpm php artisan migrate:reset
   docker exec -it tyamahori-php-fpm php artisan migrate --seed
   docker exec -it tyamahori-php-fpm ./vendor/bin/phpunit
@@ -20,7 +21,8 @@ case "$1" in
   docker exec -it tyamahori-php-fpm php artisan key:generate
   docker exec -it tyamahori-php-fpm composer install
   docker exec -it tyamahori-php-fpm chmod -R 777 storage
-  docker exec -it tyamahori-node yarn install && yarn build
+  docker exec -it tyamahori-node yarn install
+  docker exec -it tyamahori-node yarn run build
   docker exec -it tyamahori-php-fpm php artisan migrate:reset
   docker exec -it tyamahori-php-fpm php artisan migrate --seed
   docker exec -it tyamahori-php-fpm ./vendor/bin/phpunit
