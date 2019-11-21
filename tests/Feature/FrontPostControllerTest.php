@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Config;
+use App\User;
 use Artisan;
+use Config;
+use Illuminate\Support\Facades\Auth;
+use Tests\TestCase;
 
 class FrontPostControllerTest extends TestCase
 {
@@ -33,9 +35,55 @@ class FrontPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function IsProfilePageDisplayed(): void
+    public function isProfilePageDisplayed(): void
     {
         $response = $this->get('/profile');
         $response->assertStatus(200);
+    }
+
+    /**
+     * ログイン周りのテスト
+     * @test
+     */
+    public function canLogin(): void
+    {
+        $user = factory(User::class)->create([
+            'email'    => 'email@email.com',
+            'password' => bcrypt('test0987'),
+        ]);
+
+        $this->assertFalse(Auth::check());
+
+        $response = $this->post(route('login'), [
+            'email'    => $user->email,
+            'password' => 'test0987',
+        ]);
+
+        $this->assertTrue(Auth::check());
+
+        $response->assertRedirect(route('admin.home'));
+    }
+
+    /**
+     * ログインができないテスト
+     * @test
+     */
+    public function cannotLogin()
+    {
+        $user = factory(User::class)->create([
+            'email'    => 'email@email.com',
+            'password' => bcrypt('test0987'),
+        ]);
+
+        $this->assertFalse(Auth::check());
+
+        $response = $this->post(route('login'), [
+            'email'    => 'email@email.jp',
+            'password' => 'test1234',
+        ]);
+
+        $this->assertFalse(Auth::check());
+
+        $response->assertSessionHasErrors(['email']);
     }
 }
