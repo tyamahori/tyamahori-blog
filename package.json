@@ -9,7 +9,7 @@
         "build:img": "yarn run clean:img && cpx ./resources/img/**/*.* ./public/img",
         "watch:img": "yarn run build:img  --watch",
         "clean:img": "rimraf ./public/img",
-        "copy:stisla": "ncp ./resources/stisla ./public/stisla"
+        "build:stisla": "ncp ./resources/stisla ./public/stisla"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.9.0",
