@@ -81,7 +81,7 @@ class PostRepository implements PostRepositoryInterface
     public function sync(PostInterface $postEntity, array $inputData): PostInterface
     {
         // TODO 配列管理のValueObjectを使ってやる
-        $postEntity->getPostOrm()->tags()->sync($inputData['tags']);
+        $postEntity->syncTags($inputData['tags']);
         return $postEntity;
     }
 }
