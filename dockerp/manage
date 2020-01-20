@@ -1,0 +1,65 @@
+#!/bin/sh
+
+export COMPOSE_PROJECT_NAME="tyamahori"
+
+APP_NAME="${COMPOSE_PROJECT_NAME}-php-fpm"
+RUN_APP="docker exec -it ${APP_NAME}"
+
+NODE_NAME="${COMPOSE_PROJECT_NAME}-node"
+RUN_NODE="docker exec -it ${NODE_NAME}"
+
+
+case "$1" in
+
+"init")
+  docker-compose down -v
+  docker-compose up -d --build
+  $RUN_APP cp .env.local .env
+  $RUN_APP ./artisan key:generate
+  $RUN_APP composer install
+  $RUN_APP chmod -R 777 storage
+  $RUN_NODE yarn install
+  $RUN_NODE yarn run build
+  $RUN_APP ./artisan migrate:reset
+  $RUN_APP ./artisan migrate --seed
+  $RUN_APP ./vendor/bin/phpunit
+  ;;
+
+"up")
+  docker-compose up -d --build
+  $RUN_APP cp .env.local .env
+  $RUN_APP ./artisan key:generate
+  $RUN_APP composer install
+  $RUN_APP chmod -R 777 storage
+  $RUN_NODE yarn install
+  $RUN_NODE yarn run build
+  ;;
+"test")
+  docker-compose up -d --build
+  $RUN_APP cp .env.local .env
+  $RUN_APP ./artisan key:generate
+  $RUN_APP composer install
+  $RUN_APP chmod -R 777 storage
+  $RUN_NODE yarn install
+  $RUN_NODE yarn run build
+  $RUN_APP ./vendor/bin/phpunit
+  ;;
+"watch")
+  $RUN_NODE yarn run watch
+  ;;
+"down")
+  docker-compose down
+  ;;
+
+"logs")
+  docker-compose logs -f ${@:2}
+  ;;
+
+"login-php")
+  docker exec -it $APP_NAME /bin/bash
+  ;;
+
+"login-node")
+  docker exec -it $NODE_NAME /bin/sh
+  ;;
+esac

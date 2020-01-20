@@ -1,0 +1,68 @@
+version: '3'
+services:
+
+  https-portal:
+    container_name: https-portal
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      STAGE: production
+      DOMAINS: 'tyamahori.com -> http://tyamahori-nginx'
+      CLIENT_MAX_BODY_SIZE: 20M
+    volumes:
+      - ./https-portal/cert:/var/lib/https-portal
+    depends_on:
+      - tyamahori-nginx
+
+  tyamahori-nginx:
+    image: nginx:1.15
+    container_name: tyamahori-nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../:/opt/tyamahori.com
+    environment:
+      TZ: Asia/Tokyo
+    depends_on:
+      - tyamahori-php-fpm
+
+  tyamahori-php-fpm:
+    build: ./php-fpm
+    container_name: tyamahori-php-fpm
+    volumes:
+      - ../:/opt/tyamahori.com
+    working_dir: /opt/tyamahori.com
+    environment:
+      TZ: Asia/Tokyo
+
+  tyamahori-mysql:
+    image: mysql:8.0
+    container_name: tyamahori-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - db-volume:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_USER: tyamahori
+      MYSQL_ROOT_PASSWORD: tyamahori
+      MYSQL_PASSWORD: tyamahori
+      MYSQL_DATABASE: tyamahori
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_RANDOM_ROOT_PASSWORD: tyamahori
+      TZ: Asia/Tokyo
+
+  tyamahori-node:
+    container_name: tyamahori-node
+    image: node
+    volumes:
+      - ../:/app
+    working_dir: '/app'
+    tty: true
+    environment:
+      TZ: Asia/Tokyo
+
+volumes:
+  db-volume:

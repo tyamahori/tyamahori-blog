@@ -24,6 +24,8 @@ __pycache__/
 fabfile.pyc
 mix-manifest.json
 /docker/https-portal
+/dockerp/https-portal
 sitemap.xml
 tyamahoricom.pem
 /docker/mysql/.volumes
+/dockerp/mysql/.volumes
