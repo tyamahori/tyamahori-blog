@@ -24,6 +24,7 @@ class PostRepository implements PostRepositoryInterface
     public function list(): Collection
     {
         return PostOrm::all()
+            ->load('category')
             ->map(static function (PostOrm $postOrm) {
                 return new PostEntity($postOrm);
             });
