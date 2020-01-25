@@ -16,7 +16,7 @@ jobs:
           name: docker-compose up and test
           command: |
             set -x
-            cd docker && sh ./tyamahori.sh test
+            cd docker && ./manage test
 
 workflows:
   version: 2
