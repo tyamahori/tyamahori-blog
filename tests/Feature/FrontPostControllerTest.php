@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Eloquent\PostOrm;
 use App\User;
-use Artisan;
-use Config;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
@@ -25,6 +25,7 @@ class FrontPostControllerTest extends TestCase
 
     /**
      * @test
+     * TOPページにアクセスをして200が返却されることを確認
      */
     public function isTopPageDisplayed(): void
     {
@@ -68,9 +69,9 @@ class FrontPostControllerTest extends TestCase
      * ログインができないテスト
      * @test
      */
-    public function cannotLogin()
+    public function cannotLogin(): void
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'email'    => 'email@email.com',
             'password' => bcrypt('test0987'),
         ]);
@@ -85,5 +86,19 @@ class FrontPostControllerTest extends TestCase
         $this->assertFalse(Auth::check());
 
         $response->assertSessionHasErrors(['email']);
+    }
+
+    /**
+     * @test
+     * TOPページにてDBに登録されているコンテンツが見れるかのテスト
+     */
+    public function canSeePostDataOnTop(): void
+    {
+        $post = (new PostOrm())->latest()->first();
+
+        $response = $this->get(route('home'));
+
+        $response->assertSee($post->title_data);
+        $response->assertSee($post->category_name);
     }
 }
