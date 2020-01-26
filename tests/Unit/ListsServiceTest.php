@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\Eloquent\PostOrm;
 use App\Entities\PostEntity;
 use App\Interfaces\Repository\PostRepositoryInterface;
-use App\Repositories\MySql\PostRepository;
 use App\Services\Post\Lists;
 use App\ValueObject\PostIsPublic;
 use Illuminate\Support\Facades\Artisan;
